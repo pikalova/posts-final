@@ -1,0 +1,9 @@
+.menu{
+    width: 100vw;
+    padding: 5px 30px;
+}
+
+.buttonMenu{
+    display: flex;
+    justify-content: end;
+}
