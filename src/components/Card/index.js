@@ -1,13 +1,19 @@
 import React from 'react';
 
 import { Card as CardMui } from '@mui/material';
-import CardActions from '@mui/material/CardActions';
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
-import { Avatar, CardHeader, Divider } from '@mui/material';
+
+import { Avatar, CardContent, CardHeader, Divider, IconButton } from '@mui/material';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCirclePlus } from '@fortawesome/free-solid-svg-icons';
 
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
+
+const dateParse = (dateString) => {
+    const newDate = new Date(Date.parse(dateString));
+    return newDate.toLocaleString();
+
+}
 
 
 export const Card = ({ item }) => {
@@ -27,7 +33,12 @@ export const Card = ({ item }) => {
                         return <Button size="small">{el}</Button>
                     })}
                 </Typography>
-                <FontAwesomeIcon icon={faHome} />
+                <Typography variant="body2">
+                    <FontAwesomeIcon icon={faCirclePlus} /> {dateParse(item["created_at"])}
+                    <Divider orientation='vertical' style={{ margin: '0px 5px', height: 20 }}></Divider>
+                    <FontAwesomeIcon icon={faCirclePlus} /> {dateParse(item["created_at"])}
+                </Typography>
+
             </CardContent>
         </CardMui>
     );
