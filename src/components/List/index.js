@@ -9,6 +9,7 @@ export const List = ({ list }) => {
             {list?.map((item, i) => (
                  <Card key={i} item={item}/>
             ))}
+        
         </div>
     );
 };

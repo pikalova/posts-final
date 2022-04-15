@@ -41,6 +41,16 @@ module.exports = {
                 test: /\.svg$/,
                 use: ['@svgr/webpack', 'url-loader'],
             },
+            {
+                test: /\.less$/,
+                use: [{
+                    loader: 'style-loader',
+                }, {
+                    loader: 'css-loader', // translates CSS into CommonJS
+                }, {
+                    loader: 'less-loader', // compiles Less to CSS
+                }],
+            },
         ],
     },
     resolve: {

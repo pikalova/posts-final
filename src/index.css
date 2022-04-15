@@ -38,6 +38,10 @@ img {
     margin-bottom: 40px;
 }
 
+.content__cards{
+    margin: 20px 0;
+}
+
 .result {
     font-size: 24px;
 }
