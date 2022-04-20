@@ -4,7 +4,7 @@ import { Card as CardMui } from '@mui/material';
 
 import { Avatar, CardContent, CardHeader, Divider } from '@mui/material';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCirclePlus, faCircleCheck } from '@fortawesome/free-solid-svg-icons';
+import { faCirclePlus, faCircleCheck, faHeartCirclePlus } from '@fortawesome/free-solid-svg-icons';
 
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
@@ -20,6 +20,9 @@ export const Card = ({ item }) => {
     return (
         <CardMui sx={{ maxWidth: 400 }}>
             <CardContent>
+                <Typography align='right'>
+                    <FontAwesomeIcon icon={faHeartCirclePlus} color="#bb3e03" /> {item.likes.length}
+                </Typography>
                 <Button variant='text' style={{ minHeight: '80px', minWidth: '100%' }}>{item.title}</Button>
                 <Divider />
                 <CardHeader avatar={<Avatar alt={item.author.name} src={item.author.avatar} />} title={item.author.name} />
@@ -38,7 +41,6 @@ export const Card = ({ item }) => {
                 <Typography variant="body2">
                     <FontAwesomeIcon icon={faCircleCheck} color='green' /> Last Update: {dateParse(item["updated_at"])}
                 </Typography>
-
             </CardContent>
         </CardMui>
     );

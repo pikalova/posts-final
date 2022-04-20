@@ -21,7 +21,14 @@
 }
 
 
-.restButtonsContainer{
+.restButtonsContainer {
 	color: black;
-	
+
+}
+
+.avatar {
+	display: flex;
+	justify-content: end;
+	align-items: center;
+	gap: 10px;
 }
