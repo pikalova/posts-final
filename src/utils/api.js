@@ -20,6 +20,28 @@ class Api{
         const result = await onResponce(responce);
         return result;
     }
+
+    async addLikes(postId, method){
+        const responce = await fetch(`${this._url}/posts/likes/${postId}`,{
+            method: method,
+            headers: {
+                authorization : `Bearer ${this._token}`
+            }
+        });
+        const result = await onResponce(responce);
+        return result;
+    }
+
+    async deletePost(postId){
+        const responce = await fetch(`${this._url}/posts/${postId}`,{
+            method: "DELETE",
+            headers: {
+                authorization : `Bearer ${this._token}`
+            }
+        });
+        const result = await onResponce(responce);
+        return result;
+    }
 }
 
 export default new Api(config);

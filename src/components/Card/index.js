@@ -1,13 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import { Card as CardMui } from '@mui/material';
 
 import { Avatar, CardContent, CardHeader, Divider } from '@mui/material';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCirclePlus, faCircleCheck, faHeartCirclePlus } from '@fortawesome/free-solid-svg-icons';
+import { faCirclePlus, faCircleCheck, faHeartCirclePlus, faHeartCircleMinus } from '@fortawesome/free-solid-svg-icons';
 
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
+import api from '../../utils/api.js';
+import './index.css'
 
 const dateParse = (dateString) => {
     const newDate = new Date(Date.parse(dateString));
@@ -16,12 +18,39 @@ const dateParse = (dateString) => {
 }
 
 
-export const Card = ({ item }) => {
+
+export const Card = ({ item, setPostData }) => {
+    const [likes, setLikes] = useState(item.likes);
+    const [myLike, setMyLike] = useState(item.likes.includes(item.author._id))
+    const setLikesData = () => {
+        const method = myLike ? 'DELETE' : 'PUT';
+        api.addLikes(item._id, method)
+            .then((value) => {
+                setMyLike((prevState) => !prevState);
+                setLikes(value.likes);
+            })
+    }
+    const deletePost = () => {
+        api.deletePost(item._id)
+            .then((value) => {
+                setPostData((prevState) => prevState.filter((items) => items._id !== value._id));
+            })
+    }
+
     return (
         <CardMui sx={{ maxWidth: 400 }}>
             <CardContent>
-                <Typography align='right'>
-                    <FontAwesomeIcon icon={faHeartCirclePlus} color="#bb3e03" /> {item.likes.length}
+                <Typography className="card__headerButton">
+                    <Button variant="contained" onClick={deletePost} >Удалить</Button>   
+                    <Button onClick={setLikesData}>
+                        {
+                            myLike ? (<FontAwesomeIcon icon={faHeartCircleMinus} color="#bb3e03" size='xl' />)
+                                : (<FontAwesomeIcon icon={faHeartCirclePlus} color="#FF7400" size='xl' />)
+                        }
+                        <Typography style={{ padding: '0px 5px' }}>
+                            {likes.length}
+                        </Typography>
+                    </Button>
                 </Typography>
                 <Button variant='text' style={{ minHeight: '80px', minWidth: '100%' }}>{item.title}</Button>
                 <Divider />

@@ -17,8 +17,13 @@ export const App = () => {
     const [pageNumber, setPageNumber] = useState(1);
     const [postData, setPostData] = useState(mockedPostData);
     const [postDataList, setPostDataList] = useState(postData);
+    const [myUserData, setMyUserData] = useState({});
 
     useEffect(() => {
+        api.getData('users/me')
+            .then((value) => {
+                setMyUserData({ _id: value.id, name: value.name, avatar: value.avatar });
+            })
         api.getData('posts')
             .then((value) => {
                 setPostData(value);
@@ -26,18 +31,18 @@ export const App = () => {
     }, [])
 
     useEffect(() => {
-        let data = postData.slice((pageNumber - 1) * 12, pageNumber * 12);
+        let data = postData?.slice((pageNumber - 1) * 12, pageNumber * 12);
         setPostDataList(data);
-    }, [pageNumber]);
+    }, [pageNumber, postData]);
 
     return (
         <div className='appContainer'>
-            <Header />
+            <Header myUser={myUserData} />
             <Menu />
             <div className='content container'>
-                <Pagination onChange={(page) => { setPageNumber(page) }} showTotal={total => `Total ${total} items`} total={postData.length} />
+                <Pagination onChange={(page) => { setPageNumber(page) }} pageSize={12} showTotal={total => `Total ${total} items`} total={postData.length} />
                 <div className='content__cards'>
-                    <List list={postDataList} />
+                    <List list={postDataList} setPostData={setPostData}/>
                 </div>
             </div>
             <Footer />

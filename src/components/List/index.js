@@ -3,11 +3,11 @@ import { Card } from '../Card';
 
 import './index.css';
 
-export const List = ({ list }) => {
+export const List = ({ list, setPostData }) => {
     return (
         <div className="cards">
             {list?.map((item, i) => (
-                 <Card key={i} item={item}/>
+                 <Card key={i} item={item} setPostData={setPostData}/>
             ))}
         
         </div>
