@@ -45,3 +45,10 @@ img {
 .result {
     font-size: 24px;
 }
+
+.post{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    min-width: 500px;
+}

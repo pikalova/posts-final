@@ -21,6 +21,19 @@ class Api{
         return result;
     }
 
+    async addPost(data){
+        const responce = await fetch(`${this._url}/posts`,{
+            method: 'POST',
+            headers: {
+                authorization : `Bearer ${this._token}`,
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+        });
+        const result = await onResponce(responce);
+        return result;
+    }
+
     async addLikes(postId, method){
         const responce = await fetch(`${this._url}/posts/likes/${postId}`,{
             method: method,

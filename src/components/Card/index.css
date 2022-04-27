@@ -8,8 +8,13 @@
 }
 
 .card__headerButton{
+	margin-top: 15px;
 	display: flex;
 	justify-content: space-around;
+}
+
+.card__right{
+	text-align: right;
 }
 
 .card:hover {
