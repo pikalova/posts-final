@@ -11,14 +11,9 @@ import Typography from '@mui/material/Typography';
 import api from '../../utils/api.js';
 import './index.css';
 import { AlertDialog } from '../AlertDialog';
+import { Link } from 'react-router-dom';
 
-
-
-const dateParse = (dateString) => {
-    const newDate = new Date(Date.parse(dateString));
-    return newDate.toLocaleString();
-
-}
+import { dateParse } from '../../utils/functions'
 
 export const Card = ({ item, myUserData, setPostData }) => {
 
@@ -63,9 +58,10 @@ export const Card = ({ item, myUserData, setPostData }) => {
                             </Typography>
                         </Button>
                     </Typography>
-                    <Button variant='text' style={{ minHeight: '80px', minWidth: '100%' }}>{item.title}</Button>
-                    <Divider />
                     <CardHeader avatar={<Avatar alt={item.author.name} src={item.author.avatar} />} title={item.author.name} />
+                    <Divider />
+                    <Link to={`/${item._id}`} ><Button variant='text' style={{ minHeight: '80px', minWidth: '100%' }}>{item.title}</Button></Link>
+                    <Divider />
                     <Typography style={{ minHeight: '120px' }} variant="body2" color="text.secondary">
                         {item.text}
                     </Typography>

@@ -5,6 +5,8 @@ import { Snackbars } from '../SnackBar'
 import api from '../../utils/api'
 import { useNavigate } from 'react-router-dom'
 
+
+
 export const FormPost = ({setPostData,setPageNumber}) => {
     const [openSB, setOpenSB] = useState(false);
     const navigate = useNavigate();
@@ -12,6 +14,7 @@ export const FormPost = ({setPostData,setPageNumber}) => {
 
     const sendData = (event) => {
         event.preventDefault();
+        console.log(event.target.file)
         const {
             target: { title, text, image, tags: { value } },
         } = event;
@@ -19,7 +22,7 @@ export const FormPost = ({setPostData,setPageNumber}) => {
         api.addPost({
             title: title.value,
             text: text.value,
-            image: "text.img",
+            image: image.value,
             tags: editTags,
         }).then((data) => {
             setOpenSB(true);
@@ -34,18 +37,21 @@ export const FormPost = ({setPostData,setPageNumber}) => {
         })
     }
 
+ 
     return (
         <div>
             <Snackbars openSB={openSB} setOpenSB={setOpenSB} message={'Успешно добавлено'}/>
             <form className='post' onSubmit={sendData}>
-                <TextField name='title' label="Title" variant="standard" />
+                <TextField name='title' label="Title" variant="standard" required/>
+                <TextField name='image' label="Image URL" variant="standard" required />
                 <InputLabel>Text: </InputLabel>
-                <TextareaAutosize name="text" style={{ height: 200 }} />
+                <TextareaAutosize name="text" style={{ height: 200 }} required/>
                 <TextField
                     inputProps={{ pattern: "^(#{1}.{1,}){1,}$", title:'Tags should contain #, e.g. #home #aboutme' }}
                     name="tags"
                     label="Tags separated by #"
                     variant="standard"
+                    required
                 />
                 <Button type='submit' >Отправить</Button>
             </form>

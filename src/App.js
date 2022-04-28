@@ -9,6 +9,7 @@ import { Header } from './components/Header';
 import { List } from './components/List';
 import { Menu } from './components/Menu';
 import {FormPost} from './components/FormPost'
+import { ShowPost } from './components/ShowPost/index.js';
 import Pagination from 'rc-pagination';
 
 import '../public/assets/index.less';
@@ -60,6 +61,7 @@ export const App = () => {
                     </div>
                 } />
                 <Route path="add" element={<FormPost setPostData={setPostData} setPageNumber={setPageNumber}/>} />
+                <Route path="/:itemId" element={<ShowPost myUserData={myUserData} setPostData={setPostData}/>} />
                 <Route path="about" element={<div>About</div>} />
             </Routes>
 

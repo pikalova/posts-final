@@ -131,6 +131,10 @@
 	transition: background-color .3s;
 }
 
+.btn__edit{
+	margin: 10px 10px !important;
+}
+
 .btn_type_primary {
 	background-color: #fed700;
 }
