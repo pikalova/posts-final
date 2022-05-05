@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useContext } from 'react'
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { Link, useParams } from 'react-router-dom';
@@ -9,10 +9,12 @@ import { Card, CardContent, CardActions, CardMedia, Grid, CardHeader, Avatar } f
 import { faHeartCirclePlus, faHeartCircleMinus } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Comment } from '../Comment'
+import UserContext from '../../contexts/UserContext';
 
 
-export const ShowPost = ({ myUserData, setPostData }) => {
+export const ShowPost = ({ token, setPostData }) => {
   const params = useParams();
+  const {myUserData} = useContext(UserContext);
   const [item, setItem] = useState({
     author: {},
     likes: [],
@@ -20,7 +22,7 @@ export const ShowPost = ({ myUserData, setPostData }) => {
   });
 
   useEffect(() => {
-    api.getData(`posts/${params.itemId}`)
+    api.getData(`posts/${params.itemId}`, token)
       .then((value) => setItem(value))
       .catch((err) => console.log(err))
   }, [])

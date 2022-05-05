@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-import { Card as CardMui, ListItemSecondaryAction } from '@mui/material';
+import { Card as CardMui, CardMedia, ListItemSecondaryAction } from '@mui/material';
 
 import { Avatar, CardContent, CardHeader, Divider } from '@mui/material';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -62,6 +62,12 @@ export const Card = ({ item, myUserData, setPostData }) => {
                     <Divider />
                     <Link to={`/${item._id}`} ><Button variant='text' style={{ minHeight: '80px', minWidth: '100%' }}>{item.title}</Button></Link>
                     <Divider />
+                    <CardMedia
+              component="img"
+              className='img'
+              image={item.image}
+              alt={item.title}
+            />
                     <Typography style={{ minHeight: '120px' }} variant="body2" color="text.secondary">
                         {item.text}
                     </Typography>

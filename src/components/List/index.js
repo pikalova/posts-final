@@ -1,9 +1,12 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Card } from '../Card';
+import UserContext from '../../contexts/UserContext';
 
 import './index.css';
 
-export const List = ({ list,myUserData, setPostData }) => {
+export const List = ({ list, setPostData }) => {
+    const {myUserData} = useContext(UserContext)
+
     return (
         <div className="cards">
             {list?.map((item, i) => (
